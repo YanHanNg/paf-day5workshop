@@ -1,0 +1,30 @@
+<h1>SUB TODO</h1>
+<img [src]="todoImage" alt="todoImage" width="200px">
+<form [formGroup]="form" >
+    <div class="form-group">
+      <label for="exampleInput1">File Upload:</label>
+      <input type="file" Accept="image/*" #imageFile class="form-control" id="exampleInput1" formControlName="imagefile">
+      <button class="btn btn-success" (click)="uploadTodoImage()">Upload Image</button>
+    </div>
+
+    <hr> 
+    
+    <div class="form-group">
+      <label for="exampleInput2">Sub Task Name:</label>
+      <input type="text" class="form-control" id="subtaskname" formControlName="sub_task_name">
+    </div>
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="onSubmit()">Add SubTask</button>
+    </div>
+  </form>
+
+  <hr>
+
+  <div class="list-group">
+    <a class="list-group-item list-group-item-action" *ngFor="let s of subTodo" [ngClass]="{'completed': s.status_id === 1}">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{s.sub_task_name}}</h5>
+      </div>
+    </a>
+  </div>

@@ -1,0 +1,40 @@
+<h1>TODO</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="exampleInput1">Name:</label>
+      <input type="text" class="form-control" id="exampleInput1" formControlName="task_name">
+    </div>
+    <div class="form-group">
+      <label for="exampleInput2">Due Date: </label>
+      <input type="date" class="form-control" id="exampleInputPassword1" formControlName="due_date">
+    </div>
+    <div class="form-group">
+        <label for="exampleInput1">Priority: </label>
+    </div>
+    <div class="form-group">
+        <div class="form-check form-check-inline" *ngFor="let p of priority">
+            <input class="form-check-input" type="radio" formControlName="priority" value="{{p.id}}">
+            <label class="form-check-label" for="inlineRadio1">{{p.priority}}</label>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    
+  </form>
+
+  <hr>
+
+  <div class="list-group" *ngFor="let t of todo">
+    <a [routerLink]="['/subTodo', t.id ]" class="list-group-item list-group-item-action" [ngClass]="{'completed': t.status_id === 1}">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{t.priority}}</h5>
+        <small>{{t.due_date}}</small>
+      </div>
+      <div class="d-flex w-100 justify-content-between">
+        <p class="mb-1">{{t.task_name}}</p>
+      </div>
+    </a>
+    <button class="btn btn-primary" [disabled]="t.status_id === 1" (click)="completeTodo(t)">Complete Todo</button>
+  </div>
